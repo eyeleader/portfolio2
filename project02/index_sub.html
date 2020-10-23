@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>티아스치과</title>
+    <link href="css/style_sub.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <link href="css/animate.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script>
+	    new WOW().init();
+	</script>
+    
+    <script>
+        $(document).ready(function() {
+            mobile_menu();
+        });
+
+        function mobile_menu() {
+            /* 변수 선언 */
+            var $menu = null;
+            var $left_gnb = null; // 영역 전체
+            var $depth1_wrap = null;
+            var $depth1 = null;
+            var $depth1_btn = null;
+
+            /* 시작 함수 */
+            function start() {
+                init();
+                init_event();
+            }
+            /* 변수 초기화 함수 */
+            function init() {
+                $menu = $('.m_menu');
+                $left_gnb = $('.left_gnbWrap'); // 영역 전체
+                $depth1_wrap = $('.left_gnb>li');
+                $depth1 = $depth1_wrap.children('ul');
+                $depth1_btn = $depth1_wrap.children('a');
+            }
+            /* 이벤트 함수 */
+            function init_event() {
+
+                /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+                $menu.click(function(event) {
+                    event.preventDefault();
+                    $left_gnb.addClass('on');
+                });
+
+                /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+                $('.close').click(function(event) {
+                    event.preventDefault();
+
+                    $left_gnb.removeClass('on');
+
+                    // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+                    setTimeout(function() {
+                        $depth1_btn.removeClass('on');
+                        $depth1.slideUp();
+                    }, 300)
+                });
+
+                /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+                $depth1_btn.click(function(event) {
+                    event.preventDefault();
+                    var $this = $(this);
+                    var $this_ul = $this.siblings('ul');
+
+                    var check = $this.hasClass('on');
+                    if (check) {
+                        $this.removeClass('on');
+                        $this_ul.stop(true, true).slideUp();
+                    } else {
+                        $depth1_btn.removeClass('on');
+                        $depth1.stop().slideUp();
+                        $this.addClass('on');
+                        $this_ul.stop(true, true).slideDown();
+                    }
+                });
+
+                /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+                $(window).resize(function() {
+                    $left_gnb.removeClass('on');
+                });
+            }
+
+            start(); // 시작 호출
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="top_header">
+                <div class="inner">
+                    <ul class="site">
+                        <li><a href="index_main.html">본점</a></li>
+                        <li><a href="index_main.html">지점</a></li>
+                        <li>
+                            <select>
+                                <option><a href="#">&nbsp;&nbsp;지점안내</a></option>
+                                <option><a href="#">&nbsp;&nbsp;부산</a></option>
+                                <option><a href="#">&nbsp;&nbsp;인천</a></option>
+                                <option><a href="#">&nbsp;&nbsp;대구</a></option>
+                                <option><a href="#">&nbsp;&nbsp;대전</a></option>
+                                <option><a href="#">&nbsp;&nbsp;광주</a></option>
+                                <option><a href="#">&nbsp;&nbsp;울산</a></option>
+                            </select>
+                        </li>
+                    </ul>
+                    <ul class="util">
+                        <li>로그인</li>
+                        <li>회원가입</li>
+                        <li>병원소개</li>
+                        <li>ENGLISH</li>
+                    </ul>   
+                </div>
+            </div>
+            <div class="bottom_header">
+                <div class="inner">
+                    <ul class="menu">
+                        <li><a href="#">일반치료</a>
+                            <ul class="menu_sub">
+                                <li><a href="#">구강검진</a></li>
+                                <li><a href="#">충치치료</a></li>
+                                <li><a href="#">신경치료</a></li>
+                                <li><a href="#">잇몸치료</a></li>
+                                <li><a href="#">사랑니발치</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">임플란트</a>
+                            <ul class="menu_sub">
+                               <li><a href="#">발치즉시식립</a></li>
+                               <li><a href="#">네비게이션</a></li>
+                               <li><a href="#">틀니유지</a></li>
+                               <li><a href="#">전악임플란트</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">심미보철</a>
+                            <ul class="menu_sub">
+                               <li><a href="#">심미보철</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">치아미백</a>
+                            <ul class="menu_sub">
+                               <li><a href="#">치아미백</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="logo">
+                       <a href="index_main.html"><img src="img/logo2.png" alt="로고"></a>
+                    </div>
+                   <div class="sub_menu">
+                        <ul class="side">
+                            <li><i class="far fa-calendar-check"></i>진료예약</li>
+                            <li><i class="far fa-comment-dots"></i>온라인 진료상담</li>
+                            <li><i class="fas fa-search"></i>찾기</li>
+                        </ul>
+                    </div>
+                    <div class="m_menu">
+                        <a href="#">
+                        <i class="fas fa-bars" style="color: black"></i></a>
+                    </div>
+                    <nav class="left_gnbWrap">
+                        <a href="#" class="close">
+                            <img src="img/close-btn.png">
+                        </a>
+                        <ul class="left_gnb">
+                            <li>
+                                <a href="#">일반치료
+                                    <img src="img/plus_btn.png">
+                                </a>
+                                <ul>
+                                    <li><a href="index_sub.html">구강치료</a></li>
+                                    <li><a href="index_sub.html">충치치료</a></li>
+                                    <li><a href="index_sub.html">신경치료</a></li>
+                                    <li><a href="index_sub.html">잇몸치료</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">임플란트
+                                    <img src="img/plus_btn.png">
+                                </a>
+                                <ul>
+                                    <li><a href="index_sub.html">발치즉시식립</a></li>
+                                    <li><a href="index_sub.html">네비게이션</a></li>
+                                    <li><a href="index_sub.html">틀니유지</a></li>
+                                    <li><a href="index_sub.html">전악임플란트</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">심미보철
+                                    <img src="img/plus_btn.png">
+                                </a>
+                                <ul>
+                                    <li><a href="index_sub.html">심미보철</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">치아미백
+                                    <img src="img/plus_btn.png">
+                                </a>
+                                <ul>
+                                    <li><a href="index_sub.html">치아미백</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>    
+        </header>
+
+        <article id="mainimg">
+            <h1 class="hidden">메인이미지</h1>
+        </article>
+   
+
+        <main id="contents">
+            <section class="process">
+                <h1 class="hidden">임플란트 치료과정</h1>
+                <div class="process_title">
+                    <h2>임플란트 치료과정</h2>
+                </div>
+                <div class="process_con">
+                    <div class="short-info wow fadeInUp">
+                        <img src="img/implant01.jpg" alt="1.진단및치료계획">
+                    </div>
+                    <div class="short-info wow fadeInUp">
+                        <img src="img/implant02.jpg" alt="2.임플란트식립">
+                    </div>
+                    <div class="short-info wow fadeInUp">
+                        <img src="img/implant03.jpg" alt="3.지대주체결">
+                    </div>
+                    <div class="short-info wow fadeInUp">
+                        <img src="img/implant04.jpg" alt="4.보철물장착">
+                    </div>
+                    <div class="short-info wow fadeInUp">
+                        <img src="img/implant05.jpg" alt="5.정기검진">
+                    </div>
+                </div>
+            </section>
+            <section class="merit">
+                <div class="merit_title">
+                    <h2>티아스 치과<br>임플란트 장점</h2>
+                </div>
+                <div class="merit_box">
+                    <div class="merit_con1">
+                        <h4 class="short-info wow fadeInUp">01.<br>3D네비게이션 임플란트</h4>
+                        <p class="short-info wow fadeInUp">티아스치과는 모드 임플란트 시술을
+                            3D진단시스템을 통해 네비가이드를
+                            제작하는 네비게이션 임플란트를 진행하고 있습니다.</p>
+                    </div>
+                    <div class="merit_con2">
+                        <h4 class="short-info wow fadeInUp">02.<br>맞춤형 임플란트</h4>
+                        <p class="short-info wow fadeInUp">첨단 CAD/CAM장비를 이용하여 개인별
+                            잇몸에 맞게 맞춤제작된 보철물을 사용합니다.</p>
+                    </div>
+                </div>
+            </section>
+           
+        </main>
+        <footer id="footer">
+       
+        
+            <div class="top_footer">
+                <div class="inner">
+                    <ul>
+                        <li>전자공고</li>
+                        <li>개인정보처리방침</li>
+                        <li>영상정보처리기기 운영 방침</li>
+                        <li>이용약관</li>
+                        <li>스팸메일방지정책</li>
+                        <li>청소년보호정책</li>
+                        <li>이용자피해예방온라인교육</li>
+                        <li>오시는길</li>
+                        <!--:after으로 clear:both-->
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom_footer">
+                <div class="inner">
+                    <div class="f_logo">
+                        <a href="index_main.html"><img src="img/logo3.png" alt="하단로고"></a>
+                    </div>
+                    <div class="copyright">
+                        <ul>
+                            <li><span>주소</span>부산시 해운대구 중동 중동2로11</li>
+                            <li><span>대표자</span>홍길동</li>
+                            <li><span>사업자등록번호</span>312-88-123456</li>
+                            <li><span>개인정보보호책임자</span>김철수</li>
+                        </ul>
+                                <p>copyright®티아스치과 All rights reserverd.</p>
+                    </div>
+                    <div class="info">
+                        <ul>
+                            <li>고객센터</li>
+                            <li>051-8549-5581</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body></html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(사)한국청소년문화원</title>
+    <link href="css/style_organogram.css" type="text/css" rel="stylesheet">
+    <script src="javascript/script.js" defer type="text/javascript"></script>
+    <script src="javascript/jquery-1.12.3.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+   
+    <script> AOS.init(); </script>
+
+출처: https://iflue.tistory.com/175 [윤시즈]
+    
+    <script>
+        $(document).ready(function() {
+            mobile_menu();
+        });
+
+        function mobile_menu() {
+            /* 변수 선언 */
+            var $menu = null;
+            var $left_gnb = null; // 영역 전체
+            var $depth1_wrap = null;
+            var $depth1 = null;
+            var $depth1_btn = null;
+
+            /* 시작 함수 */
+            function start() {
+                init();
+                init_event();
+            }
+            /* 변수 초기화 함수 */
+            function init() {
+                $menu = $('.menu2');
+                $left_gnb = $('.left_gnbWrap'); // 영역 전체
+                $depth1_wrap = $('.left_gnb>li');
+                $depth1 = $depth1_wrap.children('ul');
+                $depth1_btn = $depth1_wrap.children('a');
+            }
+            /* 이벤트 함수 */
+            function init_event() {
+
+                /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+                $menu.click(function(event) {
+                    event.preventDefault();
+                    $left_gnb.addClass('on');
+                });
+
+                /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+                $('.close').click(function(event) {
+                    event.preventDefault();
+
+                    $left_gnb.removeClass('on');
+
+                    // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+                    setTimeout(function() {
+                        $depth1_btn.removeClass('on');
+                        $depth1.slideUp();
+                    }, 300)
+                });
+
+                /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+                $depth1_btn.click(function(event) {
+                    event.preventDefault();
+                    var $this = $(this);
+                    var $this_ul = $this.siblings('ul');
+
+                    var check = $this.hasClass('on');
+                    if (check) {
+                        $this.removeClass('on');
+                        $this_ul.stop(true, true).slideUp();
+                    } else {
+                        $depth1_btn.removeClass('on');
+                        $depth1.stop().slideUp();
+                        $this.addClass('on');
+                        $this_ul.stop(true, true).slideDown();
+                    }
+                });
+
+                /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+                $(window).resize(function() {
+                    $left_gnb.removeClass('on');
+                });
+            }
+
+            start(); // 시작 호출
+        }
+
+    </script>
+</head>
+
+<body>
+    <header id="menuwrap">
+        <div class="top">
+            <div class="logo">
+                <a href="index.html"><img src="img/logo.jpg" alt="로고"></a>
+            </div>
+            <nav class="menu">
+                <ul class="navi">
+                    <li><a href="#">문화원소개</a>
+                        <ul class="sub_menu">
+                            <li><a href="organogram.html">인사말</a></li>
+                            <li><a href="organogram.html">본원안내</a></li>
+                            <li><a href="organogram.html">오시는길</a></li>
+                            <li><a href="organogram.html">협력기관/단체</a></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">소통·참여</a>
+                        <ul class="sub_menu">
+                            <li><a href="organogram.html">본원소식</a></li>
+                            <li><a href="organogram.html">알림마당</a></li>
+                            <li><a href="organogram.html">참여마당</a></li>
+                            <li><a href="organogram.html">보도자료</a></li>
+                            <li><a href="organogram.html#">상담·문의</a></li>
+                            <li></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">사업안내</a>
+                        <ul class="sub_menu">
+                            <li><a href="busi.html">국제교류</a></li>
+                            <li><a href="busi.html">청소년자원봉사</a></li>
+                            <li><a href="busi.html">사회복지&상담</a></li>
+                            <li><a href="busi.html">꿈키움진로디자인</a></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">갤러리</a>
+                        <ul class="sub_menu">
+                            <li><a href="busi.html">국제교류</a></li>
+                            <li><a href="busi.html">청소년자원봉사</a></li>
+                            <li><a href="busi.html">사회복지&상담</a></li>
+                            <li><a href="busi.html">꿈키움진로디자인</a></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">후원/자원봉사</a>
+                        <ul class="sub_menu">
+                            <li><a href="organogram.html">후원신청</a></li>
+                            <li><a href="organogram.html">자원봉사신청</a></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="menu2">
+                <a href="#"></a>
+            </div>
+            <nav class="left_gnbWrap">
+                <a href="#" class="close">
+                    <img src="img/close-btn.png">
+                </a>
+                <ul class="left_gnb">
+                    <li>
+                        <a href="#">문화원소개
+                            <img src="img/plus_btn.png">
+                        </a>
+                        <ul>
+                            <li><a href="organogram.html">인사말</a></li>
+                            <li><a href="organogram.html">본원안내</a></li>
+                            <li><a href="organogram.html">오시는길</a></li>
+                            <li><a href="organogram.html">협력기관/단체</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">소통·참여
+                            <img src="img/plus_btn.png">
+                        </a>
+                        <ul>
+                            <li><a href="organogram.html">본원소식</a></li>
+                            <li><a href="organogram.html">알림마당</a></li>
+                            <li><a href="organogram.html">참여마당</a></li>
+                            <li><a href="organogram.html">보도자료</a></li>
+                            <li><a href="organogram.html">상담·문의</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">사업안내
+                            <img src="img/plus_btn.png">
+                        </a>
+                        <ul>
+                            <li><a href="busi.html">국제교류</a></li>
+                            <li><a href="busi.html">청소년자원봉사</a></li>
+                            <li><a href="busi.html">사회복지&상담</a></li>
+                            <li><a href="busi.html">꿈키움진로디자인</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">갤러리
+                            <img src="img/plus_btn.png">
+                        </a>
+                        <ul>
+                            <li><a href="busi.html">국제교류</a></li>
+                            <li><a href="busi.html">청소년자원봉사</a></li>
+                            <li><a href="busi.html">사회복지&상담</a></li>
+                            <li><a href="busi.html">꿈키움진로디자인</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">후원/자원봉사
+                            <img src="img/plus_btn.png">
+                        </a>
+                        <ul>
+                            <li><a href="organogram.html">후원신청</a></li>
+                            <li><a href="organogram.html">자원봉사신청</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="headerimg">
+        <h1 class="hidden">헤더이미지</h1>
+        <h2>본원안내</h2>
+        <h3>(사)한국청소년문화원은 청소년의 꿈을 응원합니다.</h3>
+    </section>
+    <section class="submenu">
+        <article class="inner">
+            <p><a href="#" class="jsMMenuBtn">문화원소개</a>
+            </p>
+            <ul class="jsMMenu">
+                <li><a href="#">인사말</a></li>
+                <li><a href="#">본원안내</a></li>
+                <li><a href="#">오시는 길</a></li>
+                <li><a href="#">협력기관/단체</a></li>
+            </ul>
+        </article>
+    </section>
+
+    <section id="contents">
+        <article class="contents_h">
+            <h2>본원안내</h2>
+            <ul>
+                <li><a href="index.html"><img src="img/home_btn.png" alt="홈버튼"></a></li>
+                <li><img class="arrow" src="img/next_Btn.png" alt="경로표시"></li>
+                <li><span>문화원소개</span></li>
+                <li><img class="arrow" src="img/next_Btn.png" alt="경로표시"></li>
+                <li><span>본원안내</span></li>
+            </ul>
+        </article>
+        <article class="bar_organ">
+            <ul>
+                <li><a href="#">조직도</a></li>
+                <li><a href="#">사업장 안내</a></li>
+                <li><a href="#">직원연락망</a></li>
+            </ul>
+        </article>
+        <article class="organogram">
+            <h1 class="hidden">조직도</h1>
+            <img src="img/orginzation.jpg" alt="조직도">
+        </article>
+    </section>
+    <footer id="footer">
+        <div class="top_footer">
+            <div class="inner">
+                <ul>
+                    <li>문화원소개</li>
+                    <li>개인정보 처리방침</li>
+                    <li>이메일무단수집거부</li>
+                    <li>직원인트라넷</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="inner">
+                <p>주소: 경남 양산시 덕명로 322, 상가 4층 &nbsp;&nbsp; 전화번호 : 055-387-6824 &nbsp;&nbsp; 기타 : 카카오톡 플러스친구 @한국청소년문화원</p>
+                <span>copyrightⓒ(사)한국청소년문화원 all rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
